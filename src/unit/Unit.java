@@ -5,9 +5,6 @@ abstract class Unit {
     int HP;
 }
 
-abstract class GroundUnit extends Unit {};
-abstract class AirUnit extends Unit {};
-
 interface Actionable {
     void move(int x, int y);
     void stop();
@@ -18,7 +15,17 @@ interface Attackable {
     void attack(int x, int y);
 }
 
-abstract class ActionUnit extends Unit implements Actionable {};
-abstract class OnlyAttackUnit extends Unit implements Attackable {};
-abstract class AttackUnit extends Unit implements Actionable, Attackable {};
+interface Stop { };
+
+interface Ground { }; // TODO: Ground 유닛도 별도로? 아니면 Flyable만 있으면 될까?
+interface Air { };
+
+abstract class ActionGroundUnit extends Unit implements Actionable, Ground {};
+abstract class StopGroundUnit extends Unit implements Stop, Ground {};
+abstract class OnlyAttackGroundUnit extends Unit implements Attackable, Ground {};
+abstract class AttackGroundUnit extends Unit implements Actionable, Attackable, Ground {};
+abstract class ActionAirUnit extends Unit implements Actionable, Air {};
+abstract class StopAirUnit extends Unit implements Stop, Air {};
+abstract class OnlyAttackAirUnit extends Unit implements Attackable, Air {};
+abstract class AttackAirUnit extends Unit implements Actionable, Attackable, Air {};
 
